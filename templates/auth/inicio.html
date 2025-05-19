@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Inicio
+{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/inicio.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('inicio') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <div id="hamburgesa" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
+    <a href="{{ url_for('estado_trafico') }}" id="ruta">Estado de trafico</a>
+    <a href="{{ url_for('contacto') }}" id="ruta">Contactanos</a>
+  </nav>
+</header>
+
+<div class="slider">
+  <img id="slider-img" src="https://d31u1w5651ly23.cloudfront.net/articulos/articulos-183130.jpg" alt="Slider">
+  <button class="flecha izquierda" onclick="anteriorSlide()">&#10094;</button>
+  <button class="flecha derecha" onclick="siguienteSlide()">&#10095;</button>
+</div>
+
+<div id="acceder">
+  <div id="contenido">
+    <img src="https://www.dgt.es/.galleries/Images/home/icono_sede.svg" alt="sede" id="info-img">
+    <div id="texto">
+      <h2>GESTIONA TUS TRAMITES EN LA SEDE ELECTRONICA</h2>
+      <p>¿Quieres pedir una cita previa para hacer tus tramites? ¿Necesitas pagar una multa?<br>
+        ¿Quieres pagar tus tasas de trafico?</p>
+      <p>Accede a la sede Electronica y realiza los tramites de forma sencilla, desde el salon de tu casa.</p>
+      <a href="{{ url_for('login') }}" id="info-button">Accede a la Sede Electronica</a>
+    </div>
+  </div>
+</div>
+
+<div id="info">
+  <div id="texto-info">
+    <h1>Nuevo método para el proceso de las multas</h1>
+    <h3>¿Aún no te enteraste?</h3>
+    <p>La DGT ha estado trabajando desde hace tiempo en una nueva función para hacerte la vida más fácil. 
+      Recibe avisos en menos de 48h a tu correo electrónico, entérate de lo que sucede en todo momento y consulta tus multas en tiempo real.</p>
+  </div>
+  <div id="img-info">
+    <img src="https://static.wixstatic.com/media/4c0429_25c0ab8870e4486d8a0060fab7f54406~mv2.png/v1/crop/x_0,y_53,w_730,h_537/fill/w_492,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Recurso%202.png" alt="info">
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-txt">
+    dgtCMO.com © 2025. Todos los derechos reservados. |
+    <a href="#">Política de Privacidad</a> |
+    <a href="#">Política de Cookies</a> |
+    <a href="#">Accesibilidad</a>
+  </div>
+  <div class="footer-icons">
+    <a><i class="fab fa-facebook-f"></i></a>
+    <a><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+<script>
+  const imagenes = [
+    "https://d31u1w5651ly23.cloudfront.net/articulos/articulos-183130.jpg",
+    "https://www.valenciaextra.com/uploads/s1/16/12/78/62/trafico-en-la-a-3-el-dia-en-que-arranca-la-segunda-fase-de-la-operacion-salida-de-semana-santa-2022.jpeg",
+    "https://s10.s3c.es/imag/_v0/6000x3275/f/2/2/Siguenlastareasde121104670.jpg"
+  ];
+  let index = 0;
+
+  function actualizarSlider() {
+    document.getElementById('slider-img').src = imagenes[index];
+  }
+
+  function siguienteSlide() {
+    index = (index + 1) % imagenes.length;
+    actualizarSlider();
+  }
+
+  function anteriorSlide() {
+    index = (index - 1 + imagenes.length) % imagenes.length;
+    actualizarSlider();
+  }
+</script>
+
+{% endblock %}

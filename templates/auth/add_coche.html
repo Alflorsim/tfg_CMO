@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Vehiculo{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/add_coche.css')}}">
+{% endblock %}
+{% block body %}
+<h2 style="text-align: center">Registrar nuevo vehiculo</h2>
+
+<form method="POST">
+    <label for="matricula">Matricula:</label>
+    <input type="text" name="matricula" required>
+  
+    <label for="marca">Marca:</label>
+    <input type="text" name="marca" required>
+  
+    <label for="modelo">Modelo:</label>
+    <input type="text" name="modelo" required>
+  
+    <label for="color">Color:</label>
+    <input type="text" name="color" required>
+  
+    <label for="imagen">Imagen (URL):</label>
+    <input type="text" name="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+  
+    <button type="submit">Guardar vehiculo</button>
+  </form>
+  
+{% endblock %}

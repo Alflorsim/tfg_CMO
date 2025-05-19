@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/login.css') }}">
+{% endblock %}
+
+{% block body %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ messages[0] }}',
+        confirmButtonColor: '#0056b3'
+      });
+    </script>
+  {% endif %}
+{% endwith %}
+<header>
+    <div id="foto-logo">
+      <a href="{{ url_for('inicio') }}" id="ruta">
+        <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+      </a>
+    </div>
+    <div id="hamburgesa" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <nav id="navegacion">
+      <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
+      <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
+      <a href="{{ url_for('estado_trafico') }}" id="ruta">Estado de tráfico</a>
+      <a href="{{ url_for('contacto') }}" id="ruta">Contáctanos</a>
+    </nav>
+  </header>
+  <h1>BIENVENIDO AL LOGIN DE LA SEDE ELECTRONICA</h1>
+<div class="login-container">
+    
+  <div class="login-card">
+    <h2>Iniciar sesion</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      
+      <label for="dni">DNI</label>
+      <input type="text" name="dni" id="dni" required placeholder="Introduce tu DNI">
+
+      <label for="password">Contraseña</label>
+      <input type="password" name="password" id="password" required placeholder="Contraseña">
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p class="register-link">
+      ¿No tienes cuenta todavía?
+      <a href="{{ url_for('register') }}">Regístrate aquí</a>
+    </p>
+  </div>
+</div>
+<footer class="footer">
+    <div class="footer-txt">
+      dgtCMO.com © 2025. Todos los derechos reservados. |
+      <a href="#">Política de Privacidad</a> |
+      <a href="#">Política de Cookies</a> |
+      <a href="#">Accesibilidad</a>
+    </div>
+    <div class="footer-icons">
+      <a><i class="fab fa-facebook-f"></i></a>
+      <a><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+{% endblock %}

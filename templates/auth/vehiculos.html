@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Vehiculos{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/vehiculos.css') }}">
+{% endblock %}
+
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alerta {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('ver_vehiculos') }}" id="ruta">Vehículos</a>
+    <a href="{{ url_for('ver_multas') }}" id="ruta">Multas</a>
+    <a href="{{ url_for('logout') }}" id="ruta">Cerrar sesión</a>
+  </nav>
+</header>  
+
+<section class="vehiculos-container">
+  <div class="header">
+    <h1>Mis Vehículos</h1>
+    <a href="{{ url_for('form_vehiculo') }}" class="btn-agregar">+ Añadir un nuevo vehículo</a>
+  </div>
+
+  {% if vehiculos|length == 0 %}
+    <div class="alerta">
+      <p>No tienes aún ningun vehiculo a tu nombre.</p>
+    </div>
+  {% else %}
+    <div class="vehiculos">
+      {% for v in vehiculos %}
+      <div class="vehiculo-card">
+        <img src="{{ v[4] }}" alt="" class="vehiculo-img">
+        <h3>{{ v[0] }}</h3> <!-- matricula -->
+        <p><strong>Marca:</strong> {{ v[1] }}</p>
+        <p><strong>Modelo:</strong> {{ v[2] }}</p>
+        <p><strong>Color:</strong> {{ v[3] }}</p>
+
+        <!-- Boton eliminar -->
+        <form action="{{ url_for('eliminar_vehiculo', matricula=v[0]) }}" method="POST">
+          <button type="submit" class="btn-eliminar">Eliminar vehículo</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% endblock %}

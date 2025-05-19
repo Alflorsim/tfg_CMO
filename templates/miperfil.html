@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Mi perfil
+{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/miperfil.css') }}">
+{% endblock %}
+
+{% block body %}
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('ver_vehiculos') }}" id="ruta">Vehículos</a>
+    <a href="{{ url_for('ver_multas') }}" id="ruta">Multas</a>
+    <a href="{{ url_for('logout') }}" id="ruta">Cerrar sesion</a>
+  </nav>
+</header>
+
+<section class="perfil-contenido">
+  <h2>Bienvenido, {{ current_user.nombre_completo }}</h2>
+  <p>Desde aqui puedes gestionar tus vehículos y consultar tus multas.</p>
+</section>
+{% endblock %}
