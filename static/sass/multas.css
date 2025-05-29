@@ -2,15 +2,9 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
   overflow-x: hidden;
   background-color: #f8f8f8;
   font-family: "Segoe UI", sans-serif;
-}
-
-h1, h2 {
-  text-align: center;
-  color: #003366;
 }
 
 header {
@@ -87,46 +81,105 @@ header {
     display: flex;
   }
 }
-.perfil-contenido {
-  display: flex;
-  height: 68.8vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 3rem 1rem;
-  max-width: 800px;
+.multas-container {
+  width: 100%;
   margin: 0 auto;
 }
-.perfil-contenido h2 {
+.multas-container h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
-}
-.perfil-contenido p {
-  font-size: 1.1rem;
-  color: #444;
+  text-align: center;
   margin-bottom: 2rem;
-}
-.perfil-contenido .btn-panel {
-  display: inline-block;
-  background-color: #0056b3;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-.perfil-contenido .btn-panel:hover {
-  background-color: #003f80;
+  color: #003366;
 }
 
+.alerta {
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.multas-listado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.multa-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+.multa-card:hover {
+  transform: translateY(-5px);
+}
+.multa-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #0056b3;
+}
+.multa-card p {
+  font-size: 0.95rem;
+  margin: 0.3rem 0;
+}
+.multa-card .pagada {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.formulario-pago {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.formulario-pago label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+.formulario-pago input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+.formulario-pago button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}
+.formulario-pago button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .multa-card {
+    max-width: 90%;
+  }
+}
 .footer {
   background-color: #90c4ee;
   color: white;
   width: 98%;
   padding: 10px 20px;
   font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -174,13 +227,6 @@ header {
   }
 }
 @media (max-width: 768px) {
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-    font-size: 16px;
-    padding: 0;
-    margin: 0;
-  }
   header {
     flex-direction: column;
     align-items: flex-start;
@@ -196,53 +242,8 @@ header {
     right: 4rem;
     top: 2rem;
   }
-  #navegacion {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 100%;
-    background: white;
-    padding: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-  }
   #navegacion.active {
     display: flex;
     width: 370px;
   }
-  .perfil-contenido {
-    height: auto;
-    padding: 2rem 1rem;
-    text-align: center;
-    height: 64vh;
-  }
-  .perfil-contenido h2 {
-    font-size: 1.6rem;
-  }
-  .perfil-contenido p {
-    font-size: 1rem;
-  }
-  .perfil-contenido .btn-panel {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
-  .footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-    padding: 2rem 1rem;
-    width: 100%;
-  }
-  .footer-txt {
-    font-size: 13px;
-    width: 100%;
-  }
-  .footer-icons {
-    justify-content: center;
-    gap: 1rem;
-    width: 100%;
-  }
-}/*# sourceMappingURL=miperfil.css.map */
+}/*# sourceMappingURL=multas.css.map */

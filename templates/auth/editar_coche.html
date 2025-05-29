@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
-
-{% block title %}
-Mi perfil
-{% endblock %}
+{% block title %}Editar Vehículo{% endblock %}
 
 {% block customCSS %}
-<link rel="stylesheet" href="{{ url_for('static', filename='sass/miperfil.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/editar_coche.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -32,20 +29,22 @@ Mi perfil
   </nav>
 </header>
 
-<section class="perfil-contenido">
-  <h2>Bienvenido, {{ current_user.nombre_completo }}</h2>
-  <p>Desde aqui puedes gestionar tus vehículos y consultar tus multas.</p>
-</section>
-<footer class="footer">
-    <div class="footer-txt">
-      dgtCMO.com © 2025. Todos los derechos reservados. |
-      <a href="#">Política de Privacidad</a> |
-      <a href="#">Política de Cookies</a> |
-      <a href="#">Accesibilidad</a>
-    </div>
-    <div class="footer-icons">
-      <a><i class="fab fa-facebook-f"></i></a>
-      <a><i class="fab fa-instagram"></i></a>
-    </div>
-  </footer>
+<h2 style="text-align: center">Editar vehiculo</h2>
+
+<form method="POST">
+
+  <label for="marca">Marca:</label>
+  <input type="text" name="marca" value="{{ vehiculo[2] }}" required>
+
+  <label for="modelo">Modelo:</label>
+  <input type="text" name="modelo" value="{{ vehiculo[3] }}" required>
+
+  <label for="color">Color:</label>
+  <input type="text" name="color" value="{{ vehiculo[4] }}" required>
+
+  <label for="imagen">Imagen (URL):</label>
+  <input type="text" name="imagen" value="{{ vehiculo[6] }}">
+
+  <button type="submit">Guardar cambios</button>
+</form>
 {% endblock %}

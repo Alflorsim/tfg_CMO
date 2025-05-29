@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Nuestros Servicios{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/nuestros_servicios.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('inicio') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo DGT">
+    </a>
+  </div>
+  <div id="hamburgesa">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
+    <a href="https://infocar.dgt.es/etraffic/" id="ruta">Estado de trafico</a>
+    <a href="{{ url_for('contacto') }}" id="ruta">Contactanos</a>
+  </nav>
+</header>
+
+<section class="servicios-layout">
+  <div class="texto-servicios">
+    <h1>Novedades en la DGT Virtual</h1>
+
+    <div class="novedad">
+      <h2>Gestión digital de vehículos</h2>
+      <p>Desde tu perfil puedes añadir, modificar o eliminar vehículos de forma rápida y segura sin acudir a una oficina.</p>
+    </div>
+
+    <div class="novedad">
+      <h2>Notificación de multas por correo electrónico</h2>
+      <p>Recibirás una notificación automática por email cuando se registre una infracción en tu vehículo.</p>
+      <ul>
+        <li>Fecha y hora de la infracción</li>
+        <li>Matrícula implicada</li>
+        <li>Descripción del motivo</li>
+        <li>Importe y estado de pago</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="imagen-servicios">
+    <img src="https://noticias.pro.pvt.coches.com/wp-content/uploads/2020/05/DGT-1.jpeg" alt="DGT Edificio">
+  </div>
+</section>
+
+<footer id="footer">
+  <div id="footer-txt">
+    dgtCMO.com © 2025. Todos los derechos reservados. |
+    <a href="#">Política de Privacidad</a> |
+    <a href="#">Política de Cookies</a> |
+    <a href="#">Accesibilidad</a>
+  </div>
+  <div id="footer-icons">
+    <a><i class="fab fa-facebook-f"></i></a>
+    <a><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+{% endblock %}

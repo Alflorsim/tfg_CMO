@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Asignar Multa{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/poner_multa.css') }}">
+{% endblock %}
+
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alerta {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<script>
+  function toggleMobileMenu() {
+    const nav = document.getElementById('navegacion');
+    nav.classList.toggle('active');
+  }
+</script>
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('panel_admin') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <div id="hamburgesa" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('panel_admin') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('poner_multa') }}" id="ruta">Poner multa</a>
+    <a href="{{ url_for('logout') }}" id="ruta">Cerrar sesion</a>
+  </nav>
+</header>
+
+<h2>Asignar Multa a Matrícula</h2>
+
+<form id="formulario-multa" method="POST">
+  <label for="matricula">Matrícula</label>
+  <input type="text" name="matricula" id="matricula" required>
+
+  <label for="descripcion">Descripción</label>
+  <textarea name="descripcion" id="descripcion" required></textarea>
+
+  <label for="foto">Foto (URL)</label>
+  <input type="text" name="foto" id="foto">
+
+  <label for="importe">Importe (€)</label>
+  <input type="number" name="importe" id="importe" inputmode="numeric" pattern="[0-9]*" required>
+
+  <button type="submit">Asignar Multa</button>
+</form>
+
+
+{% endblock %}

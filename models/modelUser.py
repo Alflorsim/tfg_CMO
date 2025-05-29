@@ -8,12 +8,13 @@ class ModelUser():
     def login(cls, db, user):
         try:
             cur = db.connection.cursor()
-            sql = 'SELECT * FROM usuarios WHERE dni = %s'
+            sql = 'SELECT id, dni, nombre_completo, correo, contraseña, rol FROM usuarios WHERE dni = %s'
             cur.execute(sql, (user.dni,))
             row = cur.fetchone()
+            cur.close()
             if row:
-                if check_password_hash(row[4], user.password):
-                    return User(row[0],row[1],row[2],row[3],row[4],row[5])
+                return User(row[0], row[1], row[2], row[3], row[4], row[5])
+            return None
         except Exception as e:
             raise Exception(e)
         

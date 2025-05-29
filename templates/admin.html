@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Mi perfil
+Panel de Administrador
 {% endblock %}
 
 {% block customCSS %}
-<link rel="stylesheet" href="{{ url_for('static', filename='sass/miperfil.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/admin.css') }}">
 {% endblock %}
 
 {% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alerta {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <script>
   function toggleMobileMenu() {
     const nav = document.getElementById('navegacion');
@@ -17,7 +24,7 @@ Mi perfil
 </script>
 <header>
   <div id="foto-logo">
-    <a href="{{ url_for('perfil_usuario') }}" id="ruta">
+    <a href="{{ url_for('panel_admin') }}" id="ruta">
       <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
     </a>
   </div>
@@ -25,16 +32,15 @@ Mi perfil
       <span></span><span></span><span></span>
   </div>
   <nav id="navegacion">
-    <a href="{{ url_for('perfil_usuario') }}" id="ruta">Inicio</a>
-    <a href="{{ url_for('ver_vehiculos') }}" id="ruta">Vehiculos</a>
-    <a href="{{ url_for('ver_multas') }}" id="ruta">Multas</a>
+    <a href="{{ url_for('panel_admin') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('poner_multa') }}" id="ruta">Poner multa</a>
     <a href="{{ url_for('logout') }}" id="ruta">Cerrar sesion</a>
   </nav>
 </header>
 
-<section class="perfil-contenido">
+<section class="admin-panel">
   <h2>Bienvenido, {{ current_user.nombre_completo }}</h2>
-  <p>Desde aqui puedes gestionar tus vehículos y consultar tus multas.</p>
+  <p>Desde aquí puedes gestionar el sistema de multas.</p>
 </section>
 <footer class="footer">
     <div class="footer-txt">

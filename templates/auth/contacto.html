@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacto{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/contacto.css') }}">
+{% endblock %}
+
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alerta {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<script>
+  function toggleMobileMenu() {
+    const nav = document.getElementById('navegacion');
+    nav.classList.toggle('active');
+  }
+</script>
+
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('inicio') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <div id="hamburgesa" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
+    <a href="https://infocar.dgt.es/etraffic/" id="ruta">Estado de trafico</a>
+    <a href="{{ url_for('contacto') }}" id="ruta">Contactanos</a>
+  </nav>
+</header>
+
+<div id="contenido-principal">
+  <div id="login-principal">
+    <!-- Izquierda -->
+    <div id="login-izquierda">
+      <h1>Contáctanos</h1>
+      <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+      <img src="https://static.wixstatic.com/media/23dd08_9a01d5e7c0bf48229ffd0e1897157984~mv2.png/v1/crop/x_90,y_66,w_1147,h_836/fill/w_560,h_408,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/contact%20us.png">
+    </div>
+
+    <!-- Derecha -->
+    <div id="login-derecha">
+      <form method="POST">
+        <label for="nombre">Nombre y apellidos</label>
+        <input type="text" name="nombre" id="nombre" placeholder="Tu nombre completo" required>
+
+        <label for="correo">Correo electronico</label>
+        <input type="email" name="correo" id="correo" placeholder="tu@email.com" required>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea name="mensaje" id="mensaje" placeholder="Escribe tu mensaje aqui..." required></textarea>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  <div id="footer-txt">
+    dgtCMO.com © 2025. Todos los derechos reservados. |
+    <a href="#">Política de Privacidad</a> |
+    <a href="#">Política de Cookies</a> |
+    <a href="#">Accesibilidad</a>
+  </div>
+  <div id="footer-icons">
+    <a><i class="fab fa-facebook-f"></i></a>
+    <a><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+{% endblock %}

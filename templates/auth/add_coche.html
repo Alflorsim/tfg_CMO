@@ -4,6 +4,28 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='sass/add_coche.css')}}">
 {% endblock %}
 {% block body %}
+<script>
+  function toggleMobileMenu() {
+    const nav = document.getElementById('navegacion');
+    nav.classList.toggle('active');
+  }
+</script>
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <div id="hamburgesa" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('ver_vehiculos') }}" id="ruta">Vehiculos</a>
+    <a href="{{ url_for('ver_multas') }}" id="ruta">Multas</a>
+    <a href="{{ url_for('logout') }}" id="ruta">Cerrar sesion</a>
+  </nav>
+</header>
 <h2 style="text-align: center">Registrar nuevo vehiculo</h2>
 
 <form method="POST">

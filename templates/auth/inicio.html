@@ -22,7 +22,7 @@ Inicio
   <nav id="navegacion">
     <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
     <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
-    <a href="{{ url_for('estado_trafico') }}" id="ruta">Estado de trafico</a>
+    <a href="https://infocar.dgt.es/etraffic/" id="ruta">Estado de trafico</a>
     <a href="{{ url_for('contacto') }}" id="ruta">Contactanos</a>
   </nav>
 </header>
@@ -72,6 +72,10 @@ Inicio
 </footer>
 
 <script>
+  function toggleMobileMenu() {
+    const nav = document.getElementById('navegacion');
+    nav.classList.toggle('active');
+  }
   const imagenes = [
     "https://d31u1w5651ly23.cloudfront.net/articulos/articulos-183130.jpg",
     "https://www.valenciaextra.com/uploads/s1/16/12/78/62/trafico-en-la-a-3-el-dia-en-que-arranca-la-segunda-fase-de-la-operacion-salida-de-semana-santa-2022.jpeg",
@@ -93,5 +97,6 @@ Inicio
     actualizarSlider();
   }
 </script>
+
 
 {% endblock %}

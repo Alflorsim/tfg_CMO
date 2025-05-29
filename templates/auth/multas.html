@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Mis Multas{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sass/multas.css') }}">
+{% endblock %}
+
+{% block body %}
+<script>
+  function toggleMobileMenu() {
+    const nav = document.getElementById('navegacion');
+    nav.classList.toggle('active');
+  }
+</script>
+<header>
+  <div id="foto-logo">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">
+      <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+    </a>
+  </div>
+  <div id="hamburgesa" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+  </div>
+  <nav id="navegacion">
+    <a href="{{ url_for('perfil_usuario') }}" id="ruta">Inicio</a>
+    <a href="{{ url_for('ver_vehiculos') }}" id="ruta">Vehiculos</a>
+    <a href="{{ url_for('ver_multas') }}" id="ruta">Multas</a>
+    <a href="{{ url_for('logout') }}" id="ruta">Cerrar sesion</a>
+  </nav>
+</header>
+
+<section class="multas-container">
+  <h2>Mis Multas Pendientes</h2>
+
+  {% if multas|length == 0 %}
+    <div class="alerta">
+      <p>No tienes ninguna multa pendiente.</p>
+    </div>
+  {% else %}
+    <div class="multas-listado">
+      {% for multa in multas %}
+        <div class="multa-card" id="multa-{{ multa[0] }}">
+          <h3>Matrícula: {{ multa[1] }}</h3>
+          <p><strong>Descripción:</strong> {{ multa[3] }}</p>
+          <p><strong>Importe:</strong> {{ '%.2f'|format(multa[6]) }} €</p>
+          <p><strong>Fecha:</strong> {{ multa[5] }}</p>
+
+
+          <form method="POST" action="{{ url_for('pagar_multa', multa_id=multa[0]) }}" class="formulario-pago">
+            <label>Nombre en la tarjeta</label>
+            <input type="text" name="nombre" required>
+
+            <label>Número de tarjeta</label>
+            <input type="text" name="tarjeta" required>
+
+            <label>CVV</label>
+            <input type="text" name="cvv" required>
+
+            <label>Fecha de expiración</label>
+            <input type="text" name="expiracion" placeholder="MM/AA" required>
+
+            <button type="submit">Confirmar pago</button>
+            </form>
+
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  function pagarTarjeta(id) {
+    document.getElementById("formulario" + id).style.display = "block";
+  }
+</script>
+
+{% if pagada %}
+<script>
+  alert("Multa pagada correctamente.");
+</script>
+{% endif %}
+{% endblock %}

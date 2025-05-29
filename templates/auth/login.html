@@ -1,73 +1,89 @@
-{% extends 'base.html' %}
+  {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+  {% block title %}Login{% endblock %}
+  {% block customCSS %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='sass/login.css') }}">
+  {% endblock %}
 
-{% block customCSS %}
-<link rel="stylesheet" href="{{ url_for('static', filename='sass/login.css') }}">
-{% endblock %}
+  {% block body %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alerta {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
-{% block body %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <script>
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: '{{ messages[0] }}',
-        confirmButtonColor: '#0056b3'
-      });
-    </script>
-  {% endif %}
-{% endwith %}
-<header>
-    <div id="foto-logo">
-      <a href="{{ url_for('inicio') }}" id="ruta">
-        <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
-      </a>
+  <script>
+    function toggleMobileMenu() {
+      const nav = document.getElementById('navegacion');
+      nav.classList.toggle('active');
+    }
+  </script>
+    <header>
+      <div id="foto-logo">
+        <a href="{{ url_for('inicio') }}" id="ruta">
+          <img src="{{ url_for('static', filename='img/LOGO_DGT.png') }}" alt="Logo">
+        </a>
+      </div>
+      <div id="hamburgesa" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <nav id="navegacion">
+        <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
+        <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
+        <a href="https://infocar.dgt.es/etraffic/" id="ruta">Estado de trafico</a>
+        <a href="{{ url_for('contacto') }}" id="ruta">Contactanos</a>
+      </nav>
+    </header>
+
+
+    <div id="contenido-principal">
+      <div id="login-principal">
+        <!-- Izquierda -->
+        <div id="login-izquierda">
+          <h1>Bienvenido al Login</h1>
+          <p>Inicia sesion en esta pagina para poder acceder a tu perfil de la DGT, veras los coches que tengas registrados y multas que tengas aun pendientes.</p>
+          <img src="https://wavenetsolutions.in/wp-content/uploads/vc_page.png">
+        </div>
+
+        <!-- Derecha -->
+        <div id="login-derecha">
+            <form method="POST">
+              
+              <label for="dni">DNI</label>
+              <input type="text" name="dni" id="dni" placeholder="Pon tu DNI">
+
+              <label for="password">Contraseña</label>
+              <input type="password" name="password" id="password" placeholder="Pon tu contraseña">
+
+              
+
+              <button type="submit">Login</button>
+
+              <div id="links">
+                <a href="#">¿Olvidaste la contraseña?</a>
+                <a href="{{ url_for('register') }}">¿No tienes cuenta? Registrate</a>
+              </div>
+            </form>
+          </div>
+      </div>
     </div>
-    <div id="hamburgesa" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </div>
-    <nav id="navegacion">
-      <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
-      <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
-      <a href="{{ url_for('estado_trafico') }}" id="ruta">Estado de tráfico</a>
-      <a href="{{ url_for('contacto') }}" id="ruta">Contáctanos</a>
-    </nav>
-  </header>
-  <h1>BIENVENIDO AL LOGIN DE LA SEDE ELECTRONICA</h1>
-<div class="login-container">
-    
-  <div class="login-card">
-    <h2>Iniciar sesion</h2>
-    <form method="POST">
-      {{ form.hidden_tag() }}
-      
-      <label for="dni">DNI</label>
-      <input type="text" name="dni" id="dni" required placeholder="Introduce tu DNI">
 
-      <label for="password">Contraseña</label>
-      <input type="password" name="password" id="password" required placeholder="Contraseña">
 
-      <button type="submit">Entrar</button>
-    </form>
 
-    <p class="register-link">
-      ¿No tienes cuenta todavía?
-      <a href="{{ url_for('register') }}">Regístrate aquí</a>
-    </p>
-  </div>
-</div>
-<footer class="footer">
-    <div class="footer-txt">
-      dgtCMO.com © 2025. Todos los derechos reservados. |
-      <a href="#">Política de Privacidad</a> |
-      <a href="#">Política de Cookies</a> |
-      <a href="#">Accesibilidad</a>
-    </div>
-    <div class="footer-icons">
-      <a><i class="fab fa-facebook-f"></i></a>
-      <a><i class="fab fa-instagram"></i></a>
-    </div>
-  </footer>
-{% endblock %}
+
+    <footer id="footer">
+      <div id="footer-txt">
+        dgtCMO.com © 2025. Todos los derechos reservados. |
+        <a href="#">Política de Privacidad</a> |
+        <a href="#">Política de Cookies</a> |
+        <a href="#">Accesibilidad</a>
+      </div>
+      <div id="footer-icons">
+        <a><i class="fab fa-facebook-f"></i></a>
+        <a><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+
+  {% endblock %}

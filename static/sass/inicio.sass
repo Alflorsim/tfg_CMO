@@ -1,12 +1,10 @@
-// --- RESET GENERAL ---
-*, *::before, *::after
-  box-sizing: border-box
-
 html, body
   margin: 0
   padding: 0
-  overflow-x: hidden
   width: 100%
+  overflow-x: hidden
+  background-color: #f8f8f8
+  font-family: 'Segoe UI', sans-serif
 
 #home-view
   display: flex
@@ -16,7 +14,7 @@ html, body
 
 // --- HEADER ---
 header
-  width: 100%
+  width: 98%
   max-width: 100%
   height: 100px
   display: flex
@@ -63,25 +61,6 @@ header
     &:hover
       background-color: #f0f0f0
       color: #0056b3
-
-@media (max-width: 768px)
-  #navegacion
-    display: none
-    flex-direction: column
-    position: absolute
-    top: 100px
-    left: 0
-    width: 100%
-    background: white
-    padding: 1rem
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
-    z-index: 999
-
-  #navegacion.active
-    display: flex
-
-  #hamburgesa
-    display: flex
 
 // --- SLIDER ---
 .slider
@@ -205,7 +184,7 @@ header
 .footer
   background-color: #90c4ee
   color: white
-  width: 100%
+  width: 98%
   padding: 10px 20px
   font-size: 14px
   font-family: 'Segoe UI', sans-serif
@@ -240,15 +219,106 @@ header
       &:hover
         transform: scale(1.2)
 
+// ==============
+// RESPONSIVE
+// ==============
 @media (max-width: 768px)
-  .footer
+  html, body
+    overflow-x: hidden
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+
+  *, *::before, *::after
+    box-sizing: inherit
+
+  header
     flex-direction: column
     align-items: flex-start
-    gap: 10px
-    padding: 20px
+    height: auto
+
+  #foto-logo img
+    height: 100px
+    width: auto
+
+  #hamburgesa
+    display: flex
+    position: absolute
+    right: 2rem
+    top: 2rem
+
+  #navegacion
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 100px
+    left: 0
+    width: 100%
+    background-color: white
+    padding: 1rem
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+    z-index: 1000
+
+  #navegacion.active
+    display: flex
+    width: 400px
+
+  .slider
+    height: 45vh
+    width: 100%
+
+  #slider-img
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+  .flecha
+    font-size: 1.3rem
+    padding: 0.4rem 0.9rem
+
+  #acceder #contenido
+    flex-direction: column
+    text-align: center
+    padding: 1rem
+    width: 100%
+
+  #acceder #texto
+    padding: 0 1rem
+    font-size: 0.95rem
+
+  #info
+    flex-direction: column
+    text-align: center
+    padding: 2rem 1rem
+    width: 100%
+
+  #texto-info, #img-info
+    max-width: 100%
+    padding: 0
+
+  #texto-info h1
+    font-size: 1.4rem
+
+  #texto-info h3
+    font-size: 1.1rem
+
+  #texto-info p
+    font-size: 0.95rem
+
+  .footer
+    flex-direction: column
+    align-items: center
+    text-align: center
+    gap: 1rem
+    padding: 2rem 1rem
+    width: 100%
 
   .footer-txt
-    font-size: 12px
+    font-size: 13px
+    width: 100%
+    padding: 0 1rem
 
   .footer-icons
-    margin-left: 0
+    justify-content: center
+    width: 100%
+    gap: 1rem

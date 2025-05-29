@@ -7,7 +7,19 @@
 {% endblock %}
 
 {% block body %}
-
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alerta {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<script>
+  function toggleMobileMenu() {
+    const nav = document.getElementById('navegacion');
+    nav.classList.toggle('active');
+  }
+</script>
 <header>
     <div id="foto-logo">
       <a href="{{ url_for('inicio') }}" id="ruta">
@@ -20,48 +32,61 @@
     <nav id="navegacion">
       <a href="{{ url_for('inicio') }}" id="ruta">Inicio</a>
       <a href="{{ url_for('nuestros_servicios') }}" id="ruta">Nuestros servicios</a>
-      <a href="{{ url_for('estado_trafico') }}" id="ruta">Estado de tráfico</a>
+      <a href="https://infocar.dgt.es/etraffic/" id="ruta">Estado de trafico</a>
       <a href="{{ url_for('contacto') }}" id="ruta">Contactanos</a>
     </nav>
   </header>
-  <h1>BIENVENIDO AL REGISTER DE LA SEDE ELECTRONICA</h1>
-<div class="register-container">
-  <div class="register-card">
-    <h2>Registro de usuario</h2>
-    <form method="POST">
-      {{ form.hidden_tag() }}
-      
-      <label for="dni">DNI</label>
-      <input type="text" name="dni" id="dni" required placeholder="Introduce tu DNI">
 
-      <label for="nombre_completo">Nombre completo</label>
-      <input type="text" name="nombre_completo" id="nombre_completo" required placeholder="Tu nombre y apellidos">
 
-      <label for="correo">Correo electronico</label>
-      <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+<div id="contenido-principal">
+  <div id="register-principal">
+    <!-- IZQUIERDA -->
+    <div id="register-izquierda">
+      <h1>Bienvenido al Registro</h1>
+      <p>Rellena el siguiente formulario para crear tu cuenta en nuestra sede electrónica de la DGT.</p>
+      <img src="https://cdn-icons-png.flaticon.com/512/3410/3410318.png">
+    </div>
 
-      <label for="password">Contraseña</label>
-      <input type="password" name="password" id="password" required placeholder="Crea una contraseña">
+    <!-- DERECHA -->
+    <div id="register-derecha">
+      <form method="POST">
 
-      <button type="submit">Registrarme</button>
-    </form>
+         
+            <label for="dni">DNI</label>
+            <input type="text" name="dni" id="dni" required placeholder="Introduce tu DNI">
+        
+         
+            <label for="nombre_completo">Nombre completo</label>
+            <input type="text" name="nombre_completo" id="nombre_completo" required placeholder="Nombre y apellidos">
+          
+       
 
-    <p class="login-link">
-      ¿Ya tienes cuenta?
-      <a href="{{ url_for('login') }}">Inicia sesion</a>
-    </p>
+        <label for="correo">Correo electrónico</label>
+        <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" required placeholder="Crea una contraseña">
+
+        <button type="submit">Registrarme</button>
+
+        <div id="links">
+          <a href="{{ url_for('login') }}">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-<footer class="footer">
-    <div class="footer-txt">
+
+<footer id="footer">
+    <div id="footer-txt">
       dgtCMO.com © 2025. Todos los derechos reservados. |
       <a href="#">Política de Privacidad</a> |
       <a href="#">Política de Cookies</a> |
       <a href="#">Accesibilidad</a>
     </div>
-    <div class="footer-icons">
+    <div id="footer-icons">
       <a><i class="fab fa-facebook-f"></i></a>
       <a><i class="fab fa-instagram"></i></a>
     </div>
-  </footer>
+</footer>
 {% endblock %}

@@ -1,0 +1,246 @@
+html, body
+  margin: 0
+  padding: 0
+  width: 100%
+  overflow-x: hidden
+  font-family: 'Segoe UI', sans-serif
+  
+  
+header
+  width: 98%
+  max-width: 100%
+  height: 100px
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0 20px
+  background-color: #ffffff
+  border-bottom: 1px solid #ccc
+  position: sticky
+  top: 0
+  z-index: 1000
+
+#foto-logo img
+  height: 150px
+  max-width: 100%
+
+#hamburgesa
+  display: none
+  flex-direction: column
+  cursor: pointer
+  span
+    width: 25px
+    height: 3px
+    background: #333
+    margin: 4px 0
+    border-radius: 2px
+
+#navegacion
+  display: flex
+  align-items: center
+  gap: 20px
+  flex-wrap: wrap
+
+  a#ruta
+    text-decoration: none
+    font-size: 18px
+    color: #216F81
+    font-weight: bold
+    padding: 8px 12px
+    border-radius: 4px
+    transition: 0.3s ease
+    white-space: nowrap
+
+    &:hover
+      background-color: #f0f0f0
+      color: #0056b3
+
+@media (max-width: 768px)
+  #navegacion
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 100px
+    left: 0
+    width: 100%
+    background: white
+    padding: 1rem
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+    z-index: 999
+
+  #navegacion.active
+    display: flex
+
+  #hamburgesa
+    display: flex
+  
+  
+  
+
+
+h2
+  text-align: center
+  color: #1f2d3d
+  margin-top: 2rem
+  font-size: 2.1rem
+  letter-spacing: 0.5px
+
+
+
+#formulario-multa
+  display: flex
+  width: 500px        
+  width: 40%              
+  margin: 2rem auto
+  background-color: white
+  padding: 3rem 3rem      
+  border-radius: 16px
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07)
+  display: flex
+  flex-direction: column
+  gap: 1.5rem
+  border: 1px solid #d9dee3
+
+
+  label
+    font-weight: 600
+    color: #2c3e50
+    margin-bottom: 0.2rem
+    font-size: 0.95rem
+
+  
+  input,
+  textarea
+    padding: 0.75rem
+    border: 1px solid #ced4da
+    border-radius: 8px
+    font-size: 1rem
+    background-color: #fefefe
+    transition: border-color 0.2s ease, box-shadow 0.2s ease
+    font-family: 'Segoe UI', sans-serif
+
+    &:focus
+      border-color: #007bff
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2)
+      outline: none
+
+  textarea
+    min-height: 120px
+    resize: none
+
+  input
+    appearance: textfield
+    -moz-appearance: textfield
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button
+      appearance: none
+      margin: 0
+
+  button
+    margin-top: 1rem
+    background-color: #007bff
+    color: white
+    padding: 0.9rem
+    border: none
+    border-radius: 8px
+    font-size: 1rem
+    font-weight: bold
+    cursor: pointer
+    transition: background-color 0.3s ease, transform 0.2s ease
+
+    &:hover
+      background-color: #0056b3
+      transform: scale(1.02)
+
+// ALERTAS FLASH
+.alerta
+  display: flex
+  align-items: center
+  justify-content: center
+  font-weight: bold
+  width: 100%
+  text-align: center
+  height: 10vh
+
+  &.success
+    background-color: #d4edda
+    color: #155724
+    border: 1px solid #c3e6cb
+
+  &.error
+    background-color: #f8d7da
+    color: #721c24
+    border: 1px solid #f5c6cb
+
+  &.warning
+    background-color: #fff3cd
+    color: #856404
+    border: 1px solid #ffeeba
+
+
+
+
+@media (max-width: 768px)
+  html, body
+    overflow-x: hidden
+    font-size: 16px
+
+  @media (max-width: 768px)
+  header
+    flex-direction: column
+    align-items: flex-start
+    height: auto
+
+  #foto-logo img
+    height: 100px
+    width: auto
+
+  #hamburgesa
+    display: flex
+    position: absolute
+    right: 4rem
+    top: 2rem
+
+  #navegacion
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 100px
+    left: 0
+    width: 100%
+    background: white
+    padding: 1rem
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+    z-index: 1000
+
+  #navegacion.active
+    display: flex
+    width: 370px
+
+  h2
+    font-size: 1.6rem
+    margin-top: 1.5rem
+    padding: 0 1rem
+
+  #formulario-multa
+    width: 90%
+    padding: 2rem 1.5rem
+    gap: 1rem
+
+    label
+      font-size: 0.9rem
+
+    input,
+    textarea
+      font-size: 0.95rem
+      padding: 0.65rem
+
+    button
+      font-size: 1rem
+      padding: 0.75rem
+
+  .alerta
+    font-size: 0.95rem
+    padding: 0.75rem
+    width: 95%
+    margin: 1rem auto
