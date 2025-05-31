@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 from config import config
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from forms import registerForm, loginForm, contactForm
 from models.entities.user import User
 from models.modelUser import ModelUser
@@ -84,6 +84,82 @@ Mensaje: {mensaje}
 
     return render_template('auth/contacto.html', form=form)
 
+
+@app.route('/cambiar_password', methods=['GET', 'POST'])
+def cambiar_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        cur = db.connection.cursor()
+        cur.execute("SELECT id FROM usuarios WHERE correo = %s", (email,))
+        user = cur.fetchone()
+
+        if user:
+         
+            s = URLSafeTimedSerializer(app.secret_key)
+            token = s.dumps(email, salt='recuperar-clave')
+            reset_url = url_for('reset_password', token=token, _external=True)
+
+       
+            sender_mail = os.getenv("EMAIL_SENDER")
+            password = os.getenv("EMAIL_PASSWORD")
+            smtp_server = "smtp.gmail.com"
+            port = 587
+
+            cuerpo = f"""Hola,
+
+Haz clic en el siguiente enlace para restablecer tu contraseña:
+{reset_url}"""
+
+            try:
+                msg = EmailMessage()
+                msg["Subject"] = "Recuperacion de contraseña"
+                msg["From"] = sender_mail
+                msg["To"] = email
+                msg.set_content(cuerpo)
+
+                context = ssl.create_default_context()
+                server = smtplib.SMTP(smtp_server, port)
+                server.starttls(context=context)
+                server.login(sender_mail, password)
+                server.send_message(msg)
+                server.quit()
+
+                flash("Te hemos enviado un enlace para restablecer tu contraseña.", "success")
+                return redirect(url_for('login'))
+            except Exception as e:
+                flash("No se pudo enviar el correo. Intenta mas tarde.", "error")
+        else:
+            flash("No hay ningun usuario con ese correo.", "error")
+
+        return redirect(url_for('cambiar_password'))
+
+    return render_template('auth/cambiar_password.html')
+
+
+@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    try:
+        email = URLSafeTimedSerializer(app.secret_key).loads(
+            token,
+            salt='recuperar-clave',
+            max_age= 120
+        )
+    except SignatureExpired:
+        flash("El enlace ha expirado. Solicita uno nuevo.", "error")
+        return redirect(url_for('cambiar_password'))
+    except BadSignature:
+        flash("Enlace invalido.", "error")
+        return redirect(url_for('cambiar_password'))
+
+    if request.method == 'POST':
+        nueva_pass = generate_password_hash(request.form['password'])
+        cur = db.connection.cursor()
+        cur.execute("UPDATE usuarios SET contraseña = %s WHERE correo = %s", (nueva_pass, email))
+        db.connection.commit()
+        flash("Contraseña restablecida correctamente.", "success")
+        return redirect(url_for('login'))
+
+    return render_template('auth/reset_password.html', token=token)
 
 # ============================================================================================================================================
 # LOGIN / REGISTER

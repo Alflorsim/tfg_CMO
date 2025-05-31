@@ -1,4 +1,3 @@
-
 from models.entities.user import User
 from werkzeug.security import check_password_hash
 
